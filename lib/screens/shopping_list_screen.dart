@@ -55,7 +55,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
                 Navigator.of(context).pop();
               }
             },
-            child: Text('Přidat'),
+            child: Text('Add'),
           ),
         ],
       ),
@@ -73,7 +73,7 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Remove Item?'),
-        content: Text('Are you sure to remove this item: "${_items[index].name}"?'),
+        content: Text('Are you sure to remove: "${_items[index].name}"?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),

@@ -15,8 +15,8 @@ class MainApp extends StatelessWidget {
       title: 'Shopping list app',
       theme:  ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.purple,
-          brightness: Brightness.dark
+          seedColor: Colors.purpleAccent,
+          brightness: Brightness.light
         )
       ),
       home:   ShoppingListScreen(),
