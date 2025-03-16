@@ -12,7 +12,7 @@ class ShoppingListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        item.name,
+        '${item.name} (x${item.quantity})',
         style: TextStyle(
           decoration: item.isBought ? TextDecoration.lineThrough : TextDecoration.none,
         ),

@@ -10,10 +10,56 @@ class ShoppingListScreen extends StatefulWidget {
 class _ShoppingListScreenState extends State<ShoppingListScreen> {
   final List<Item> _items = [];
 
+  // void _addItem() {
+  //   setState(() {
+  //     _items.add(Item(name: 'Item ${_items.length + 1}', isBought: false));
+  //   });
+  // }
   void _addItem() {
-    setState(() {
-      _items.add(Item(name: 'Item ${_items.length + 1}', isBought: false));
-    });
+    TextEditingController nameController = TextEditingController();
+    TextEditingController quantityController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Add item'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: nameController,
+              decoration: InputDecoration(labelText: 'Name of item'),
+            ),
+            TextField(
+              controller: quantityController,
+              decoration: InputDecoration(labelText: 'Quantity'),
+              keyboardType: TextInputType.number,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              if (nameController.text.isNotEmpty && quantityController.text.isNotEmpty) {
+                setState(() {
+                  _items.add(Item(
+                    name: nameController.text,
+                    quantity: int.tryParse(quantityController.text) ?? 1,
+                    isBought: false,
+                  ));
+                });
+                Navigator.of(context).pop();
+              }
+            },
+            child: Text('Přidat'),
+          ),
+        ],
+      ),
+    );
   }
 
  void _toggleItem(int index) {
