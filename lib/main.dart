@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_list_suchanek_erasmus/screens/shopping_list_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,12 +10,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Shopping list app',
+      theme:  ThemeData(primarySwatch: Colors.blue),
+      home:   ShoppingListScreen(),
     );
   }
 }
