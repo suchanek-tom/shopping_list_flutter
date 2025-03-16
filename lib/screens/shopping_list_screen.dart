@@ -12,9 +12,41 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
 
   void _addItem() {
     setState(() {
-      _items.add(Item(name: 'Položka ${_items.length + 1}'));
+      _items.add(Item(name: 'Item ${_items.length + 1}', isBought: false));
     });
   }
+
+ void _toggleItem(int index) {
+    setState(() {
+      _items[index].isBought = !_items[index].isBought;
+    });
+  }
+
+  void _removeItem(int index) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Remove Item?'),
+        content: Text('Are you sure to remove this item: "${_items[index].name}"?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              setState(() {
+                _items.removeAt(index);
+              });
+              Navigator.of(context).pop();
+            },
+            child: Text('Remove'),
+          ),
+        ],
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +55,11 @@ class _ShoppingListScreenState extends State<ShoppingListScreen> {
       body: ListView.builder(
         itemCount: _items.length,
         itemBuilder: (context, index) {
-          return ShoppingListItem(item: _items[index]);
+          return ShoppingListItem(
+            item: _items[index],
+            onTap: () => _toggleItem(index),
+            onLongPress: () => _removeItem(index),
+            );
         },
       ),
       floatingActionButton: FloatingActionButton(
